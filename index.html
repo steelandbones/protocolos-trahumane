@@ -1,0 +1,507 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Protocolos Postquirúrgicos Trahumane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: clinical binder. Sticky index on the left (desktop), one self-contained sheet per protocol on the right. */
+:root{
+  --paper:#f5f6f3; --sheet:#ffffff; --ink:#1b2430; --muted:#5b6672; --rule:#dde1db;
+  --accent:#2e6b5e; --accent-soft:#e3eee9; --hosp:#1f4f7a; --hosp-soft:#e4edf6;
+  --alarm:#a3401f; --alarm-soft:#f8e9e2; --gate:#7a5b12; --gate-soft:#f5eedb;
+  --f-display:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-body:"Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12171c; --sheet:#1a2027; --ink:#e7ebe8; --muted:#9aa6b0; --rule:#2c343c;
+  --accent:#7cc1ae; --accent-soft:#1f322d; --hosp:#8db9e3; --hosp-soft:#1d2a38;
+  --alarm:#ef9a78; --alarm-soft:#3a2219; --gate:#e2c27a; --gate-soft:#342b17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12171c; --sheet:#1a2027; --ink:#e7ebe8; --muted:#9aa6b0; --rule:#2c343c;
+  --accent:#7cc1ae; --accent-soft:#1f322d; --hosp:#8db9e3; --hosp-soft:#1d2a38;
+  --alarm:#ef9a78; --alarm-soft:#3a2219; --gate:#e2c27a; --gate-soft:#342b17; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0;padding-inline:16px;padding-block:0 48px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* index */
+nav.index{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);padding-block:24px 0}
+nav.index h2{font:600 11px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+nav.index ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+nav.index a{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:7px 8px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.25}
+nav.index a:hover{background:var(--accent-soft)}
+nav.index svg{width:26px;height:26px;color:var(--accent)}
+nav.index .common{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+@media (max-width:900px){
+  nav.index{position:static;padding-top:16px}
+  nav.index ol{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  nav.index .common{margin:0;padding:0;border:0}
+}
+
+/* masthead */
+header.mast{padding-block:40px 8px}
+.eyebrow{font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,4.4vw,44px);line-height:1.08;margin:10px 0 12px;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:64ch;margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* sheets */
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:28px clamp(16px,3vw,36px) 26px;margin-top:28px;scroll-margin-top:16px}
+.sheet-head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:start}
+.region{width:64px;height:64px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.region svg{width:44px;height:44px}
+.num{font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em}
+h2.ptitle{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,2.6vw,28px);line-height:1.15;margin:6px 0 8px;text-wrap:balance}
+.thesis{margin:0;max-width:70ch}
+h3{font:600 11.5px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h3 svg{width:16px;height:16px}
+
+/* key facts */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:22px}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fact{background:var(--sheet);padding:12px 14px;display:grid;grid-template-columns:20px minmax(0,1fr);gap:4px 10px;align-items:start}
+.fact svg{width:20px;height:20px;color:var(--accent);margin-top:2px}
+.fact b{display:block;font:600 10.5px/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.fact span{font-size:13.5px;line-height:1.35}
+
+/* hospital strip */
+.hosp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.hday{padding:12px 14px;background:var(--hosp-soft);border-right:1px solid var(--sheet);position:relative}
+.hday:last-child{border-right:0}
+.hday .d{font:500 12px/1 var(--f-mono);color:var(--hosp);letter-spacing:.04em;display:block;margin-bottom:6px}
+.hday p{margin:0;font-size:13.5px;line-height:1.45}
+.note{margin:12px 0 0;font-size:13.5px;color:var(--muted)}
+.note strong{color:var(--ink)}
+
+/* phases */
+.phases{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px}
+@media (max-width:760px){.phases{grid-template-columns:minmax(0,1fr)}}
+.phase{border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;min-width:0}
+.phase .top{padding:12px 14px 10px;border-bottom:1px solid var(--rule)}
+.phase .t{font:500 12px/1 var(--f-mono);color:var(--accent);display:block;margin-bottom:6px}
+.phase .nm{font-weight:600;font-size:14.5px;line-height:1.25}
+.phase .body{padding:10px 14px 12px;font-size:13px;line-height:1.45;flex:1}
+.phase .body p{margin:0 0 6px}
+.phase .goal{color:var(--muted)}
+.gate{margin:0 10px 10px;padding:8px 10px;background:var(--gate-soft);border-radius:6px;font-size:12.5px;line-height:1.4;display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px}
+.gate svg{width:16px;height:16px;color:var(--gate);margin-top:1px}
+.gate b{color:var(--gate);font-weight:600}
+
+/* small table */
+.mini{width:100%;border-collapse:collapse;font-size:13.5px}
+.mini th{font:600 10.5px/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule)}
+.mini td{padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.mini tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto}
+
+/* alarms */
+.alarm{background:var(--alarm-soft);border-radius:8px;padding:12px 16px;display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;margin-top:22px}
+.alarm svg{width:20px;height:20px;color:var(--alarm);margin-top:2px}
+.alarm b{color:var(--alarm);font:600 11px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:6px}
+.alarm ul{margin:0;padding-left:18px;font-size:13.5px}
+.refs{margin-top:16px;font-size:12.5px;color:var(--muted)}
+.refs a{font-family:var(--f-mono);font-size:12px}
+
+/* common section */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:13.5px}
+.checklist li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px}
+.checklist svg{width:18px;height:18px;color:var(--accent);margin-top:1px}
+.stay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.stay{grid-template-columns:minmax(0,1fr)}}
+.stay div{border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.stay .v{font:500 18px/1.2 var(--f-mono);color:var(--hosp);display:block;margin:4px 0}
+.stay small{color:var(--muted);font-size:12.5px;display:block}
+.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px;gap:0;position:relative}
+@media (max-width:640px){.cal{grid-template-columns:minmax(0,1fr);row-gap:16px}.cal div:not(:last-child) .when::after{display:none}}
+.cal div{padding:0 12px 0 0;font-size:13px;line-height:1.4}
+.cal .when{font:500 13px/1 var(--f-mono);color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cal .when::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--sheet);flex:none}
+.cal div:not(:last-child) .when::after{content:"";height:1px;background:var(--rule);flex:1}
+
+.bib ol{padding-left:22px;font-size:13px;display:grid;gap:6px;margin:0}
+.bib li{padding-left:4px}
+.bib h4{font:600 11px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+footer{max-width:1040px;margin:32px auto 0;font-size:12.5px;color:var(--muted)}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+
+/* home launcher + views */
+.wrap{max-width:1040px;margin:0 auto;display:block}
+.launch-h{font:600 11.5px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:28px 0 12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+a.tile{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;padding:14px 16px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s,box-shadow .15s}
+a.tile:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 2px 0 var(--accent-soft)}
+a.tile .ti{width:52px;height:52px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+a.tile .ti svg{width:36px;height:36px}
+a.tile .tn{font:500 11.5px/1 var(--f-mono);color:var(--muted);display:block;margin-bottom:5px}
+a.tile .tt{font-weight:600;font-size:14.5px;line-height:1.25;display:block}
+a.tile .ts{font-size:12.5px;color:var(--muted);display:block;margin-top:4px}
+a.tile.bibt .ti{background:var(--hosp-soft);color:var(--hosp)}
+.viewbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding-block:24px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--rule);border-radius:999px;background:var(--sheet);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:500}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn svg{width:16px;height:16px}
+.pager{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:20px}
+.view > .sheet:first-of-type{margin-top:16px}
+@media (prefers-reduced-motion: reduce){a.tile{transition:none}a.tile:hover{transform:none}}
+/* Bankart vs Latarjet split */
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.split{grid-template-columns:minmax(0,1fr)}}
+.split article{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;background:var(--sheet)}
+.split h4{margin:0 0 8px;font-family:var(--f-display);font-weight:600;font-size:18px;color:var(--accent);text-align:center}
+.split ul{margin:0;padding-left:18px;font-size:13.5px;display:grid;gap:5px}
+/* precautions box */
+.prec{border:1.5px solid var(--gate);background:var(--gate-soft);border-radius:8px;padding:14px 18px;margin-top:22px;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px}
+.prec svg{width:22px;height:22px;color:var(--gate);margin-top:1px}
+.prec b{color:var(--gate);font:600 11px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.prec ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:4px}
+.prec p{margin:8px 0 0;font-size:13px;color:var(--muted)}
+/* centered titles and subtitles */
+header.mast{text-align:center}
+header.mast .lede{margin-inline:auto}
+.launch-h{text-align:center}
+.sheet-head{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:12px}
+.sheet-head .thesis{margin-inline:auto}
+h3{justify-content:center}
+.bib h4{text-align:center}
+/* justified text */
+.lede,.thesis{text-align:justify;text-align-last:center;hyphens:auto;-webkit-hyphens:auto}
+.note,.hday p,.phase .body p,.alarm li,.checklist li,.stay small,.cal div{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-hip" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c5 7 33 7 38 0"/><path d="M12 14c-1 7 3 13 10 13"/><circle cx="21" cy="21" r="4.5"/><path d="M24 25l8 18M28 22l9 19"/></symbol>
+    <symbol id="i-knee" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4v14M29 4v14"/><path d="M17 18c0 5 14 5 14 0"/><path d="M17 29c0-4 14-4 14 0"/><path d="M19 29v15M29 29v15"/><ellipse cx="35.5" cy="22" rx="2.5" ry="4"/></symbol>
+    <symbol id="i-shoulder" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h21c6 0 10 2 13 6"/><path d="M8 15l10 22"/><circle cx="31" cy="22" r="6"/><path d="M28 27.5l-1 16.5M34 27.5l-1 16.5"/></symbol>
+    <symbol id="i-wrist" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3v18M25 3v18"/><path d="M13 21c0 3 3 4 6 4M24 21c0 3 3 4 6 4"/><circle cx="17" cy="29" r="2.4"/><circle cx="23" cy="29" r="2.4"/><circle cx="29" cy="29" r="2.4"/><path d="M14 33l-3 12M19 33l-1 12M24 33v12M29 33l2 12M33 30l6 9"/></symbol>
+    <symbol id="i-ankle" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3v22M25 3v18"/><path d="M30 3v24"/><path d="M14 25c0 3 3 5 7 5s9-1 10-4"/><path d="M12 31c0 7 4 10 10 10h20c2 0 2-4 0-5l-10-4"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6v13M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11" r="2"/></symbol>
+    <symbol id="i-load" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M8 10l4 4 4-4"/><path d="M4 19h16"/><path d="M6 21h12"/></symbol>
+    <symbol id="i-sling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3l5 9 5-9"/><path d="M5 13h14v3a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 17H2z"/><path d="M12 10v4M12 17.5v.1"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+    <symbol id="i-steps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h4v-4h4v-4h4V7h4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="8" rx="4" transform="rotate(-35 12 12)"/><path d="M9.5 8.5l5 7"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap" lang="es">
+  <main>
+  <div class="view" id="inicio">
+    <header class="mast">
+      <div class="eyebrow">Trahumane · Cirugía ortopédica y traumatología</div>
+      <h1>Protocolos de seguimiento postquirúrgico</h1>
+      <p class="lede">Diez protocolos de referencia, desde la planta de hospitalización hasta el alta funcional. Cada uno avanza por criterios clínicos, con plazos orientativos. Si el informe quirúrgico indica otra pauta de carga, rango o inmovilización, prevalece el cirujano.</p>
+    </header>
+
+    <section class="launcher" aria-labelledby="launch-t">
+      <h2 class="launch-h" id="launch-t">Abrir un protocolo</h2>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section class="sheet" id="comun" aria-labelledby="comun-t">
+      <div class="sheet-head">
+        <div class="region" aria-hidden="true"><svg><use href="#i-bed"/></svg></div>
+        <div>
+          <div class="num">00 · Común a todas las cirugías</div>
+          <h2 class="ptitle" id="comun-t">Fase hospitalaria común</h2>
+          <p class="thesis">Movilización en las primeras 24 horas con analgesia multimodal: reduce la estancia sin aumentar las complicaciones <a href="#bib">[1, 2, 5]</a>. Cada protocolo añade solo lo específico.</p>
+        </div>
+      </div>
+
+      <h3><svg><use href="#i-bed"/></svg>Estancia habitual</h3>
+      <div class="stay">
+        <div><b>Prótesis</b><span class="v">2 · 3-4 días</span><small>Cadera, rodilla e invertida de hombro. 2 días en jóvenes; 3-4 a partir de 65 años o con comorbilidad.</small></div>
+        <div><b>Fracturas</b><span class="v">≈ 2 días</span><small>Muñeca, húmero proximal con placa y tobillo, si el dolor está controlado.</small></div>
+        <div><b>Artroscopias</b><span class="v">1 día</span><small>Manguito, inestabilidad, LCA y sutura meniscal. 2 si el dolor no se controla o surge alguna incidencia.</small></div>
+      </div>
+
+      <h3><svg><use href="#i-steps"/></svg>Controles diarios en planta</h3>
+      <div class="scroll"><table class="mini">
+        <thead><tr><th>Control</th><th>Qué vigilar</th><th>Actuación</th></tr></thead>
+        <tbody>
+          <tr><td>Dolor</td><td>EVA en reposo cada 24 h</td><td>Paracetamol, AINE si no hay contraindicación, bloqueos regionales; opioides solo de rescate</td></tr>
+          <tr><td>Neurovascular</td><td>Pulsos, relleno capilar, sensibilidad y motilidad distal</td><td>Dolor desproporcionado al estiramiento pasivo: descartar síndrome compartimental</td></tr>
+          <tr><td>Herida</td><td>Sangrado, exudado, signos de infección</td><td>Apósito oclusivo; avisar si el exudado persiste más allá del día 3-5</td></tr>
+          <tr><td>Tromboembolismo</td><td>Pantorrilla dolorosa o edematosa, disnea, dolor torácico</td><td>Profilaxis según la tabla inferior y movilización precoz</td></tr>
+          <tr><td>Estado general</td><td>Hemoglobina, tensión, diuresis, náuseas</td><td>Retirar la sonda en las primeras 24 h (como máximo 48 h tras la cirugía) y los sueros lo antes posible</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="grid2">
+        <div>
+          <h3><svg><use href="#i-pill"/></svg>Profilaxis tromboembólica · pauta del centro</h3>
+          <table class="mini">
+            <tbody>
+              <tr><td><b>Prótesis de cadera</b></td><td>HBPM 30 días postoperatorios</td></tr>
+              <tr><td><b>Prótesis de rodilla</b></td><td>HBPM 30 días postoperatorios</td></tr>
+              <tr><td><b>MI inmovilizado</b></td><td>Valorar HBPM mientras dure la descarga o inmovilización</td></tr>
+              <tr><td><b>Miembro superior</b></td><td>Habitualmente no, salvo factores de riesgo</td></tr>
+            </tbody>
+          </table>
+          <p class="note">En el centro solo se usa HBPM; no se pautan aspirina ni otros anticoagulantes <a href="#bib">[3]</a>.</p>
+        </div>
+        <div>
+          <h3><svg><use href="#i-gate"/></svg>Criterios de alta</h3>
+          <ul class="checklist">
+            <li><svg><use href="#i-gate"/></svg>Dolor controlado con analgesia oral.</li>
+            <li><svg><use href="#i-gate"/></svg>Herida seca, constantes estables y diuresis normal.</li>
+            <li><svg><use href="#i-gate"/></svg>Paciente y cuidador conocen la carga, la ortesis o cabestrillo, los ejercicios y las señales de alarma.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3><svg><use href="#i-cal"/></svg>Revisiones tras el alta</h3>
+      <div class="cal">
+        <div><span class="when">Cada 48-72 h</span>Pedir cita con enfermería para curas de la herida</div>
+        <div><span class="when">12-14 días</span>Valorar la retirada de los puntos de sutura</div>
+      </div>
+
+      <div class="alarm" role="note">
+        <svg><use href="#i-alert"/></svg>
+        <div><b>Señales de alarma comunes</b>
+          <ul>
+            <li>Fiebre de más de 38 °C o herida roja, caliente o con supuración.</li>
+            <li>Dolor que aumenta en lugar de disminuir, o desproporcionado.</li>
+            <li>Pantorrilla dolorosa e hinchada, disnea o dolor torácico.</li>
+            <li>Hormigueo, frialdad o pérdida de fuerza distal nuevos.</li>
+            <li>Chasquido con pérdida brusca de función (luxación, fallo de la fijación o rerrotura).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+    <div id="protocols"></div>
+
+    <section class="bib view" id="bib" hidden aria-labelledby="bib-t">
+      <div class="viewbar"><a class="btn" href="#inicio"><svg aria-hidden="true"><use href="#i-home"/></svg>Volver al inicio</a></div>
+      <div class="sheet">
+      <div class="sheet-head">
+        <div class="region" aria-hidden="true"><svg><use href="#i-book"/></svg></div>
+        <div>
+          <div class="num">Evidencia</div>
+          <h2 class="ptitle" id="bib-t">Bibliografía</h2>
+          <p class="thesis">Guías clínicas, revisiones Cochrane y consensos de sociedades científicas consultados el 11/10/2026.</p>
+        </div>
+      </div>
+      <div id="biblist"></div>
+    </div>
+    </section>
+  </main>
+</div>
+<footer>Trahumane · Documento de trabajo para uso clínico interno. Versión del 11/10/2026.</footer>
+
+<script>
+const P = [
+ {id:"cadera", icon:"hip", title:"Prótesis total de cadera",
+  thesis:"El plan empieza el día 1, porque el día de la cirugía la mayoría de pacientes sigue bajo el efecto de la anestesia. Primeros pasos con andador el día 1 y carga según tolerancia en prótesis primarias. Las precauciones estrictas de cadera no han demostrado reducir la luxación y pueden retrasar la función; se aplican según el abordaje y el cirujano.",
+  facts:[["bed","Estancia","2 días (jóvenes) · 3-4 días (≥ 65 años)"],["load","Carga","Según tolerancia desde el día 1"],["sling","Ayudas","Andador o bastones; se retiran o se mantienen según el paciente y su evolución"],["flag","Alta funcional","3-6 meses"]],
+  hosp:[["Día 1","Sedestación al borde de la cama y primeros pasos con andador. Bomba de tobillo, isométricos de cuádriceps y glúteo."],["Día 2","Marcha con andador 2-3 veces al día, transferencias, flexión activa asistida hasta 70-90°, abducción en decúbito. Alta posible en jóvenes."],["Días 3-4","Paso a bastones, escaleras, programa domiciliario y precauciones si las hay. Alta en mayores de 65 años."]],
+  prec:{items:["No sentarse en asientos bajos.","Evitar giros bruscos.","Evitar elevar la rodilla más de 90° por encima de la cadera."],why:"Norma general para todos los pacientes, para reducir el riesgo de luxación de la prótesis."},
+  note:"<strong>Precauciones (si el cirujano las indica, 6 semanas).</strong> Abordaje posterior: evitar flexión de más de 90°, aducción más allá de la línea media y rotación interna. Abordaje anterior: evitar extensión con rotación externa forzadas. Alza de WC y cojín en asientos bajos.",
+  phases:[["I. Protección","0-6 semanas","Control del dolor y edema, marcha segura","Ejercicio activo dentro de precauciones, puente glúteo, abducción en bipedestación, sentarse-levantarse","Marcha sin cojera con 1 bastón y dolor ≤ 3/10"],
+   ["II. Fuerza","6-12 semanas","Retirar ayudas si es posible y según el paciente; fuerza de abductores y extensores","Resistencia progresiva, step-ups, equilibrio monopodal, bicicleta estática","Trendelenburg negativo y marcha sin ayuda"],
+   ["III. Función","3-6 meses","Vida diaria y ocio","Caminar, nadar, bicicleta. Conducir con control del pedal (4-6 semanas en pierna derecha)","Escala Oxford o HOOS satisfactoria: alta"]],
+  alarms:["Dolor brusco con acortamiento y rotación de la pierna (luxación).","Dolor en ingle o muslo persistente con la carga (aflojamiento o fractura periprotésica)."],
+  refs:[1,2,4,5]},
+ {id:"rodilla", icon:"knee", title:"Prótesis total de rodilla",
+  thesis:"Carga según tolerancia desde el día 0-1, con prioridad en la extensión completa y en activar el cuádriceps. La guía de la APTA recomienda fortalecimiento progresivo de alta intensidad; la artromotora (CPM) no aporta beneficio relevante y no se recomienda de rutina.",
+  facts:[["bed","Estancia","2 días (jóvenes) · 3-4 días (≥ 65 años)"],["load","Carga","Según tolerancia desde el día 0-1"],["steps","Objetivo sem 6","Flexión ≥ 100°, extensión ≥ -5°"],["flag","Alta funcional","3-6 meses"]],
+  hosp:[["Día 0","Isométricos de cuádriceps, elevación de pierna recta, bomba de tobillo, frío y elevación. Primeros pasos con andador."],["Días 1-2","Flexión activa asistida hasta 70-90°, extensión con toalla bajo el tobillo (nunca almohada bajo la rodilla), marcha con andador o bastones."],["Días 2-4","Escaleras, transferencias, programa domiciliario. Alta."]],
+  phases:[["I. Movilidad","0-6 semanas","Extensión completa, flexión ≥ 90-110°, edema","Movilidad activa y pasiva, rótula y cicatriz, bicicleta desde 100°, cuádriceps y glúteo","Flexión ≥ 100°, extensión ≥ -5°, marcha con 1 bastón"],
+   ["II. Fuerza","6-12 semanas","Fuerza y marcha sin ayuda","Fortalecimiento con carga, sentarse-levantarse, step-ups, equilibrio","Marcha sin ayuda y escaleras alternando pies"],
+   ["III. Función","3-6 meses","Vida diaria y ocio","Entrenamiento funcional y aeróbico de bajo impacto","Escala Oxford o KOOS satisfactoria: alta"]],
+  alarms:["Déficit de extensión activa (lesión del aparato extensor).","Derrame caliente persistente (infección)."],
+  refs:[1,6,7]},
+ {id:"manguito", icon:"shoulder", title:"Reparación del manguito rotador",
+  thesis:"Cabestrillo 4-6 semanas con movilidad pasiva protegida y fortalecimiento no antes de la semana 12. La movilidad precoz mejora la movilidad a corto plazo pero puede aumentar la rerrotura en roturas grandes; por eso el consenso ASSET retrasa el inicio según el tamaño.",
+  facts:[["bed","Estancia","1 día (2 si dolor o incidencia)"],["sling","Cabestrillo","4-6 semanas con cojín de abducción"],["steps","Activo","Desde la semana 6"],["flag","Retorno","4-6 meses; esfuerzo o lanzamiento 6-12"]],
+  table:{head:["Tamaño de la rotura","Movilidad pasiva","Retirar cabestrillo"],rows:[["Pequeña o mediana (< 3 cm)","Semanas 0-2","4 semanas"],["Grande o masiva (≥ 3 cm), tendón de mala calidad","Semanas 2-6","6 semanas"]]},
+  hosp:[["Día 0","Cabestrillo con cojín las 24 h, también para dormir. Codo, muñeca y mano activos, retracción escapular, frío."],["Día 1 · alta","Pendulares si el cirujano los autoriza. Enseñar higiene axilar sin separar el brazo y vestido empezando por el brazo operado."]],
+  phases:[["I. Protección","0-6 semanas","Proteger la sutura, evitar rigidez","Solo pasivo por el fisioterapeuta: flexión en plano escapular 90-120°, RE 20-30° hacia la semana 6","Flexión pasiva ≥ 120° y dolor controlado"],
+   ["II. Movilidad activa","6-12 semanas","Movilidad activa completa","Activo-asistido y activo, poleas, control escapular, isométricos submáximos","Movilidad activa casi completa sin elevar la escápula"],
+   ["III. Fuerza","12-20 semanas","Fuerza del manguito y escapular","Bandas elásticas y pesos ligeros en RE y RI, elevación progresiva","Fuerza ≥ 70-80 % del lado sano"],
+   ["IV. Retorno","4-12 meses","Gesto laboral o deportivo","Pliometría y trabajo específico","Escala Constant o ASES: alta"]],
+  alarms:["Pérdida brusca de elevación activa o chasquido con dolor (rerrotura).","Rigidez marcada a las 6-8 semanas (capsulitis)."],
+  refs:[8,9]},
+ {id:"inestabilidad", icon:"shoulder", title:"Inestabilidad de hombro (Bankart o Latarjet)",
+  thesis:"Limitar la rotación externa y la abducción combinadas durante 6 semanas protege la reparación capsulolabral. Fortalecimiento desde la semana 6-8 y deporte de contacto no antes de 5-6 meses. Las primeras semanas son distintas en Bankart y en Latarjet.",
+  facts:[["bed","Estancia","1 día (2 si dolor o incidencia)"],["sling","Cabestrillo","Bankart 3-4 semanas · Latarjet 7 días"],["steps","Límite clave","Sin RE en abducción 6 semanas"],["flag","Contacto","Desde 5-6 meses"]],
+  split:[["Bankart",["Cabestrillo 3-4 semanas.","Desde la semana 2: flexoextensión de codo y muñeca y pendulares suaves, 2 veces al día."]],["Latarjet",["Cabestrillo 7 días.","Desde el día 8: retirar el cabestrillo si lo tolera.","Movilización pasiva por el propio paciente: pendulares suaves y pasivos asistidos con el brazo contralateral hasta 90°.","Revisión del paciente a las 3 semanas."]]],
+  hosp:[["Día 0","Cabestrillo en rotación neutra o interna. Control escapular, frío."],["Día 1 · alta","Enseñar a evitar la posición de aprehensión (abducción con rotación externa). Retirar el cabestrillo solo para ejercicios y aseo."]],
+  phases:[["I. Protección","0-6 semanas","Proteger la reparación","Flexión hasta 90° (sem 3) y 135° (sem 6). RE en aducción hasta 10-30° (sem 3) y 35-50° (sem 6). Isométricos submáximos","Rangos de la semana 6 sin dolor ni aprensión"],
+   ["II. Movilidad y fuerza","6-12 semanas","Movilidad completa","Bandas en RE y RI, propiocepción, cadena cerrada. RE a 90° de abducción gradual","Movilidad completa y fuerza RE/RI ≥ 70 %"],
+   ["III. Fuerza avanzada","3-5 meses","Potencia y control","Pliometría y posiciones de riesgo controladas","Fuerza ≥ 90 % y aprensión negativa"],
+   ["IV. Deporte","Desde 5-6 meses","Retorno deportivo","Gesto específico; contacto o lanzamiento desde 6 meses","Fuerza simétrica, CKCUEST y confianza del paciente"]],
+  alarms:["Nuevo episodio de luxación o subluxación.","Latarjet: dolor persistente en el injerto, o hipoestesia en territorio musculocutáneo o axilar."],
+  refs:[10]},
+ {id:"lca", icon:"knee", title:"Reconstrucción del ligamento cruzado anterior",
+  thesis:"Carga según tolerancia y extensión completa desde el primer día. La vuelta al deporte se decide por criterios y no antes de 9 meses: en la cohorte Delaware-Oslo, esperar y lograr simetría de cuádriceps se asoció a hasta un 84 % menos de nuevas lesiones. Si hubo sutura meniscal, se aplican sus restricciones.",
+  facts:[["bed","Estancia","1 día (2 si dolor o incidencia)"],["load","Carga","Según tolerancia; ortesis solo si se indica"],["steps","Cadena abierta","90-45° desde la semana 4"],["flag","Deporte","Desde 9 meses, por criterios"]],
+  hosp:[["Día 0","Extensión completa pasiva (talón sobre un rodillo), isométricos de cuádriceps, elevación de pierna recta, flexión hasta 90°."],["Día 1 · alta","Marcha con 2 bastones, frío con compresión, electroestimulación del cuádriceps si hay inhibición."]],
+  phases:[["I. Postoperatoria","0-2 semanas","Extensión completa, derrame, cuádriceps","Movilidad, cadena cerrada, marcha con bastones","Extensión completa, flexión ≥ 90°, derrame mínimo"],
+   ["II. Fuerza inicial","2-12 semanas","Marcha normal y fuerza","Cadena cerrada; cadena abierta 90-45° desde la semana 4 y arco completo desde la 12; bicicleta, equilibrio","Marcha sin cojera y cuádriceps ≥ 70 % del lado sano"],
+   ["III. Carrera","3-6 meses","Carrera y saltos","Carrera progresiva, pliometría bilateral y luego unilateral, control neuromuscular","Fuerza y saltos ≥ 80 %"],
+   ["IV. Deporte","Desde 9 meses","Deporte sin restricciones","Gesto específico, cambios de dirección, prevención de lesiones","Fuerza y saltos ≥ 90 %, ACL-RSI y permiso médico"]],
+  alarms:["Déficit de extensión que no mejora a las 4 semanas (cíclope o artrofibrosis).","Derrame recurrente o inestabilidad."],
+  refs:[11,12,13]},
+ {id:"menisco", icon:"knee", title:"Sutura meniscal artroscópica",
+  thesis:"No hay consenso sobre carga y flexión. La mayoría de protocolos limitan la flexión en carga a 90° durante 4-6 semanas, y las revisiones no muestran peores resultados con carga precoz en roturas longitudinales estables. Radiales, de raíz o asas complejas: descarga 4-6 semanas.",
+  facts:[["bed","Estancia","1 día (2 si dolor o incidencia)"],["load","Carga","Según tipo de sutura"],["steps","Flexión","0-90° hasta la semana 4-6"],["flag","Deporte","4-6 meses"]],
+  table:{head:["Tipo de sutura","Carga","Flexión"],rows:[["Longitudinal o vertical, estable","Según tolerancia","0-90° hasta la semana 4-6"],["Radial, raíz o asa de cubo compleja","Descarga o apoyo de contacto 4-6 semanas","0-90° hasta la semana 4-6"]]},
+  hosp:[["Día 0","Bastones con la carga pautada, extensión completa, isométricos de cuádriceps."],["Día 1 · alta","Elevación de pierna recta, flexión pasiva hasta 90°, frío y compresión."]],
+  phases:[["I. Protección","0-6 semanas","Proteger la sutura","Movilidad 0-90°, isométricos de cuádriceps e isquiotibiales, sin sentadilla en carga ni rotaciones","Sin derrame ni dolor interlineal"],
+   ["II. Carga completa","6-12 semanas","Marcha normal y flexión completa","Retirar ortesis y bastones, cadena cerrada hasta 90°, bicicleta, equilibrio. Sin sentadilla profunda hasta la semana 12-16","Marcha sin cojera y fuerza ≥ 70 %"],
+   ["III. Fuerza y carrera","3-4 meses","Iniciar carrera","Fortalecimiento progresivo, carrera en línea recta","Fuerza ≥ 80 % y sin dolor interlineal"],
+   ["IV. Deporte","4-6 meses","Deporte con pivote","Pliometría y cambios de dirección","Fuerza y saltos ≥ 90 % y sin derrame"]],
+  alarms:["Bloqueo articular, dolor interlineal o derrame que reaparecen (fallo de la sutura)."],
+  refs:[14,15]},
+ {id:"muneca", icon:"wrist", title:"Fractura de radio y/o cúbito distal",
+  thesis:"Con placa volar estable, los dedos se mueven desde el día 0 y la muñeca desde la semana 1-2, sin férula larga. La carga y el fortalecimiento esperan a la consolidación (6-8 semanas). Con agujas o fijador externo se inmoviliza hasta su retirada.",
+  facts:[["bed","Estancia","Unos 2 días"],["sling","Inmovilización","Férula de reposo si se indica"],["steps","Muñeca activa","Desde la semana 1-2"],["flag","Carga en la mano","Tras consolidar, 6-8 semanas"]],
+  hosp:[["Día 0","Mano elevada por encima del corazón, frío. Dedos completos (puño y extensión), pulgar, codo y hombro activos."],["Días 1-2 · alta","Vigilar el nervio mediano y signos precoces de dolor regional complejo. Férula antebraquial de reposo si la indica el cirujano."]],
+  phases:[["I. Movilidad precoz","0-6 semanas","Dedos completos e iniciar muñeca","Flexo-extensión, desviaciones y pronosupinación activas desde la semana 1-2, edema, uso ligero (< 0,5-1 kg)","Callo óseo en la radiografía de la semana 6"],
+   ["II. Fuerza","6-12 semanas","Movilidad completa y prensión","Movilidad pasiva, estiramientos, fortalecimiento progresivo, prensión","Movilidad ≥ 80 % del lado sano"],
+   ["III. Función","3-6 meses","Trabajo y deporte","Carga sobre la mano (apoyos, flexiones) y gesto laboral","Escala PRWE o DASH: alta"]],
+  alarms:["Dolor quemante, edema, cambios de color o temperatura (dolor regional complejo).","Dolor dorsal con crepitación al extender el pulgar (irritación o rotura del extensor largo).","Parestesias en el territorio del mediano."],
+  refs:[16,17]},
+ {id:"humero-placa", icon:"shoulder", title:"Fractura de húmero proximal con placa",
+  thesis:"La pauta inicial depende de la estabilidad de la osteosíntesis: con fijación estable, cabestrillo 3-7 días y movilidad según tolerancia; en fracturas muy inestables, cabestrillo 2 semanas antes de empezar a mover. Fuerza desde la semana 8-12. Si se reinsertaron tuberosidades, sin rotación externa activa ni forzada 6 semanas.",
+  facts:[["bed","Estancia","Unos 2 días"],["sling","Cabestrillo","Estable 3-7 días · Fractura muy inestable 2 semanas"],["steps","Movilidad","Según la estabilidad de la fijación"],["cal","Radiografía","2, 6 y 12 semanas"]],
+  splitTitle:"Inicio según la estabilidad de la osteosíntesis",
+  split:[["Osteosíntesis estable",["Cabestrillo 3-7 días.","Después, movilidad pasiva y activa según tolerancia."]],["Fracturas muy inestables",["Cabestrillo 2 semanas.","Desde la semana 2: pendulares y movilidad pasiva por debajo de 90°."]]],
+  hosp:[["Día 0-1","Codo, muñeca y mano activos, retracción escapular. Radiografía de control."],["Día 2 · alta","Comprobar el nervio axilar (sensibilidad lateral del hombro). En mayores: caídas y osteoporosis."]],
+  phases:[["I. Protección","0-6 semanas","Evitar rigidez sin desplazar la fijación","Según la estabilidad de la fijación (ver recuadro superior). Sin cargar peso","Callo y sin desplazamiento en la radiografía"],
+   ["II. Movilidad activa","6-12 semanas","Movilidad funcional","Activo completo, poleas, isométricos, control escapular","Elevación activa ≥ 120°"],
+   ["III. Fuerza","3-6 meses","Fuerza y función","Bandas y pesos progresivos, actividad por encima de la cabeza","Escala Constant o DASH: alta"]],
+  alarms:["Pérdida de movilidad con dolor creciente: desplazamiento, protrusión de tornillos o necrosis de la cabeza humeral."],
+  refs:[18,19]},
+ {id:"invertida", icon:"shoulder", title:"Fractura de húmero proximal con prótesis invertida",
+  thesis:"La prótesis invertida depende del deltoides, lo que permite movilidad activa-asistida precoz sin más complicaciones que la rehabilitación diferida. En fractura se protege la consolidación de las tuberosidades durante 6 semanas. La evidencia específica es escasa y los plazos son de consenso.",
+  facts:[["bed","Estancia","2 días (jóvenes) · 3-4 días (≥ 65 años)"],["sling","Cabestrillo","3-6 semanas"],["alert","Antiluxación","Sin extensión + aducción + RI, 6 semanas"],["flag","Expectativa","Elevación activa 100-130°"]],
+  hosp:[["Día 0-1","Cabestrillo. Codo, muñeca y mano, pendulares, flexión pasiva en supino hasta 90°."],["Días 2-4 · alta","Enseñar la precaución antiluxación: no llevar la mano a la espalda ni apoyarse en ese brazo para levantarse. Nervio axilar, hematoma, caídas y osteoporosis."]],
+  phases:[["I. Protección","0-6 semanas","Proteger tuberosidades, evitar luxación","Pasivo y activo-asistido: flexión en plano escapular 90-120°, RE 20-30°. Deltoides isométrico desde la semana 3-4","Tuberosidades en posición en la radiografía"],
+   ["II. Movilidad activa","6-12 semanas","Elevación activa funcional","Activo en supino y luego de pie, deltoides y escapulares, RI suave","Elevación activa ≥ 90-120°"],
+   ["III. Fuerza","3-6 meses","Fuerza para la vida diaria","Fortalecimiento ligero; límite habitual de 5-10 kg según cirujano","Escala Constant o ASES: alta"]],
+  note:"<strong>Objetivos realistas.</strong> Elevación activa en torno a 100-130° y rotación externa limitada. Conviene explicarlo al paciente desde el inicio.",
+  alarms:["Chasquido con pérdida brusca de función (luxación).","Dolor en la espina escapular o el acromion (fractura por estrés del deltoides).","Dolor tardío con fiebre (infección, a menudo por Cutibacterium)."],
+  refs:[18,20]},
+ {id:"tobillo", icon:"ankle", title:"Fractura de tobillo con osteosíntesis",
+  thesis:"Tras una fijación estable, la carga y la movilidad en las primeras 2 semanas devuelven antes la función y el trabajo sin aumentar las complicaciones de forma significativa. Sindesmosis fijada, maléolo posterior grande, conminución, diabetes con neuropatía u osteoporosis: descarga 6 semanas.",
+  facts:[["bed","Estancia","Unos 2 días"],["load","Carga","Precoz si es estable; si no, a la semana 6"],["sling","Ortesis","Férula y después bota tipo Walker"],["flag","Alta funcional","3-6 meses"]],
+  hosp:[["Día 0","Elevación, frío, férula posterior. Vigilar la herida (flictenas) y el síndrome compartimental las primeras 24-48 h."],["Días 1-2 · alta","Marcha con andador o bastones con la carga pautada, transferencias, escaleras. Profilaxis tromboembólica mientras dure la descarga."]],
+  phases:[["I. Protección","0-2 semanas","Cicatrización","Férula, elevación, movilidad de dedos, rodilla y cadera","Herida cerrada y retirada de puntos"],
+   ["II. Carga precoz","2-6 semanas","Carga y movilidad","Estable: carga según tolerancia con bota. Inestable: descarga. Movilidad activa de tobillo fuera de la bota, fuerza de cadera y rodilla","Consolidación progresiva en la radiografía de la semana 6"],
+   ["III. Marcha normal","6-12 semanas","Retirar bota y bastones","Flexión dorsal, tríceps sural y peroneos, propiocepción, reeducación de la marcha","Marcha sin cojera y elevación de talón monopodal"],
+   ["IV. Función","3-6 meses","Trabajo y deporte","Carrera y saltos progresivos, gesto laboral o deportivo","Escala OMAS: alta"]],
+  alarms:["Dehiscencia o necrosis de la herida (más frecuente en diabéticos y fumadores).","Pantorrilla dolorosa e hinchada (trombosis venosa).","Pérdida de la reducción en la radiografía de control."],
+  refs:[3,21,22,23]}
+];
+
+const B = [
+ ["Fase hospitalaria, cadera y rodilla",[
+  [1,"Wainwright TW, Gill M, McDonald DA, et al. Consensus statement for perioperative care in total hip replacement and total knee replacement surgery: ERAS Society recommendations. Acta Orthop. 2020;91(1):3-19.","https://pubmed.ncbi.nlm.nih.gov/31663402/","PMID 31663402"],
+  [2,"Guerra ML, Singh PJ, Taylor NF. Early mobilization of patients who have had a hip or knee joint replacement reduces length of stay in hospital: a systematic review. Clin Rehabil. 2015;29(9):844-54.","https://unisa.edu.au/contentassets/0e9445854b3245e99063ef414e3653bd/guerra-et-al.-2015-sr.pdf","Texto completo"],
+  [3,"NICE. Venous thromboembolism in over 16s: reducing the risk of hospital-acquired DVT or PE (NG89). 2018, actualizada 2019.","https://www.nice.org.uk/guidance/ng89","NICE NG89"],
+  [4,"Smith TO, Jepson P, Beswick A, et al. Assistive devices, hip precautions, environmental modifications and training to prevent dislocation and improve function after hip arthroplasty. Cochrane Database Syst Rev. 2016;CD010815.","https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD010815.pub2/information","Cochrane"],
+  [5,"Masaracchio M, Hanney WJ, Liu X, Kolber M, Kirker K. Timing of rehabilitation on length of stay and cost in patients with hip or knee joint arthroplasty: systematic review with meta-analysis. PLoS One. 2017;12(6):e0178295.","https://pmc.ncbi.nlm.nih.gov/articles/PMC5456061/","PMC5456061"],
+  [6,"Jette DU, Hunter SJ, Burkett L, et al. Physical therapist management of total knee arthroplasty. Phys Ther. 2020;100(9):1603-31.","https://pmc.ncbi.nlm.nih.gov/articles/PMC7462050/","PMC7462050"],
+  [7,"Harvey LA, Brosseau L, Herbert RD. Continuous passive motion following total knee arthroplasty in people with arthritis. Cochrane Database Syst Rev. 2014;CD004260.","https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004260.pub3/information","Cochrane"]]],
+ ["Hombro: manguito e inestabilidad",[
+  [8,"Thigpen CA, Shaffer MA, Gaunt BW, et al. The American Society of Shoulder and Elbow Therapists' consensus statement on rehabilitation following arthroscopic rotator cuff repair. J Shoulder Elbow Surg. 2016;25(4):521-35.","https://scholars.duke.edu/publication/1488364","Ficha"],
+  [9,"Comisión de Rehabilitación de la DVSE y col. Rehabilitation following rotator cuff repair.","https://pmc.ncbi.nlm.nih.gov/articles/PMC5834570/","PMC5834570"],
+  [10,"Gaunt BW, Shaffer MA, Sauers EL, et al. The American Society of Shoulder and Elbow Therapists' consensus rehabilitation guideline for arthroscopic anterior capsulolabral repair of the shoulder. J Orthop Sports Phys Ther. 2010;40(3):155-68.","https://scholars.duke.edu/publication/918756","Ficha"]]],
+ ["Rodilla: LCA y menisco",[
+  [11,"van Melick N, van Cingel RE, Brooijmans F, et al. Evidence-based clinical practice update: practice guidelines for ACL rehabilitation based on a systematic review and multidisciplinary consensus. Br J Sports Med. 2016;50(24):1506-15.","https://bjsm.bmj.com/content/50/24/1506","BJSM"],
+  [12,"Kotsifaki R, Korakakis V, King E, et al. Aspetar clinical practice guideline on rehabilitation after anterior cruciate ligament reconstruction. Br J Sports Med. 2023;57(9):500-14.","https://pubmed.ncbi.nlm.nih.gov/36731908/","PMID 36731908"],
+  [13,"Grindem H, Snyder-Mackler L, Moksnes H, Engebretsen L, Risberg MA. Simple decision rules can reduce reinjury risk by 84% after ACL reconstruction: the Delaware-Oslo ACL cohort study. Br J Sports Med. 2016;50(13):804-8.","https://pmc.ncbi.nlm.nih.gov/articles/PMC4912389/","PMC4912389"],
+  [14,"Spang RC, Nasr MC, Mohamadi A, et al. Rehabilitation following meniscal repair: a systematic review. BMJ Open Sport Exerc Med. 2018;4(1):e000212.","https://pubmed.ncbi.nlm.nih.gov/29682310/","PMID 29682310"],
+  [15,"Postoperative rehabilitation protocol after isolated meniscal repair: a systematic review. 2025.","https://pmc.ncbi.nlm.nih.gov/articles/PMC12290329/","PMC12290329"]]],
+ ["Fracturas de miembro superior",[
+  [16,"Handoll HH, Elliott J. Rehabilitation for distal radial fractures in adults. Cochrane Database Syst Rev. 2015;CD003324.","https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD003324.pub3","Cochrane"],
+  [17,"American Academy of Orthopaedic Surgeons. Management of distal radius fractures: evidence-based clinical practice guideline. 2020.","https://www.aaos.org/drfcpg","AAOS"],
+  [18,"Handoll HH, Elliott J, Thillemann TM, Aluko P, Brorson S. Interventions for treating proximal humeral fractures in adults. Cochrane Database Syst Rev. 2022;CD000434.","https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD000434.pub5/information","Cochrane"],
+  [19,"Hodgson SA, Mawson SJ, Stanley D. Rehabilitation after two-part fractures of the neck of the humerus. J Bone Joint Surg Br. 2003;85(3):419-22.","https://boneandjoint.org.uk/article/10.1302/0301-620X.85B3.13458/pdf","DOI"],
+  [20,"Effectiveness of early versus delayed rehabilitation following total shoulder replacement: a systematic review. 2022.","https://pmc.ncbi.nlm.nih.gov/articles/PMC8807994/","PMC8807994"]]],
+ ["Tobillo",[
+  [21,"Lin CW, Donkers NA, Refshauge KM, et al. Rehabilitation for ankle fractures in adults. Cochrane Database Syst Rev. 2012;CD005595.","https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005595.pub3/information","Cochrane"],
+  [22,"Smeeing DP, Houwert RM, Briet JP, et al. Weight-bearing and mobilization in the postoperative care of ankle fractures: systematic review and meta-analysis. PLoS One. 2015;10(2):e0118320.","https://pmc.ncbi.nlm.nih.gov/articles/PMC4335061/","PMC4335061"],
+  [23,"Dehghan N, McKee MD, Jenkinson RJ, et al. Early weightbearing and range of motion versus non-weightbearing and immobilization after ORIF of unstable ankle fractures: a randomized controlled trial. J Orthop Trauma. 2016;30(7):345-52.","https://ir.lib.uwo.ca/boneandjointpub/1100","Ficha"]]]
+];
+
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const ic = n => `<svg aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const tiles = document.getElementById("tiles");
+const host = document.getElementById("protocols");
+
+P.forEach((p, i) => {
+  const n = String(i + 1).padStart(2, "0");
+  tiles.insertAdjacentHTML("beforeend", `<a class="tile" href="#${p.id}"><span class="ti">${ic(p.icon)}</span><span><span class="tn">${n}</span><span class="tt">${esc(p.title)}</span><span class="ts">Estancia: ${esc(p.facts[0][2])}</span></span></a>`);
+  const prev = P[i - 1], next = P[i + 1];
+  const facts = p.facts.map(([k, l, v]) => `<div class="fact">${ic(k)}<div><b>${esc(l)}</b><span>${esc(v)}</span></div></div>`).join("");
+  const table = p.table ? `<h3>${ic("steps")}Según la lesión</h3><div class="scroll"><table class="mini"><thead><tr>${p.table.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${p.table.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
+  const hosp = p.hosp.map(([d, t]) => `<div class="hday"><span class="d">${esc(d)}</span><p>${esc(t)}</p></div>`).join("");
+  const phases = p.phases.map(([nm, t, g, a, gate], k) => `<article class="phase"><div class="top"><span class="t">${esc(t)}</span><div class="nm">${esc(nm)}</div></div><div class="body"><p class="goal">${esc(g)}</p><p>${esc(a)}</p></div><div class="gate">${ic("gate")}<span><b>${k === p.phases.length - 1 ? "Alta:" : "Avanzar si:"}</b> ${esc(gate)}</span></div></article>`).join("");
+  const refs = p.refs.map(r => `<a href="#ref-${r}">[${r}]</a>`).join(" ");
+  host.insertAdjacentHTML("beforeend", `
+  <div class="view" id="${p.id}" hidden>
+  <div class="viewbar"><a class="btn" href="#inicio">${ic("home")}Volver al inicio</a>
+    <div class="legend" aria-label="Leyenda"><span><i class="sw" style="background:var(--hosp-soft);border:1px solid var(--hosp)"></i>Ingreso</span><span><i class="sw" style="background:var(--gate-soft);border:1px solid var(--gate)"></i>Criterio para avanzar</span><span><i class="sw" style="background:var(--alarm-soft);border:1px solid var(--alarm)"></i>Alarma</span></div></div>
+  <section class="sheet" aria-labelledby="${p.id}-t">
+    <div class="sheet-head">
+      <div class="region" aria-hidden="true"><svg><use href="#i-${p.icon}"/></svg></div>
+      <div><div class="num">${n} · Protocolo</div><h2 class="ptitle" id="${p.id}-t">${esc(p.title)}</h2><p class="thesis">${esc(p.thesis)}</p></div>
+    </div>
+    <div class="facts">${facts}</div>
+    ${p.split ? `<h3>${ic("sling")}${esc(p.splitTitle || "Primeras semanas según la técnica")}</h3><div class="split">${p.split.map(([t, xs]) => `<article><h4>${esc(t)}</h4><ul>${xs.map(x => `<li>${esc(x)}</li>`).join("")}</ul></article>`).join("")}</div>` : ""}
+    ${table}
+    <h3>${ic("bed")}Hospitalización</h3>
+    <div class="hosp">${hosp}</div>
+    ${p.prec ? `<div class="prec" role="note">${ic("alert")}<div><b>Precauciones</b><ul>${p.prec.items.map(x => `<li>${esc(x)}</li>`).join("")}</ul><p>${esc(p.prec.why)}</p></div></div>` : ""}
+    ${p.note ? `<p class="note">${p.note}</p>` : ""}
+    <h3>${ic("steps")}Fases tras el alta</h3>
+    <div class="phases" style="--n:${p.phases.length}">${phases}</div>
+    <div class="alarm" role="note">${ic("alert")}<div><b>Alarma específica</b><ul>${p.alarms.map(a => `<li>${esc(a)}</li>`).join("")}</ul></div></div>
+    <p class="refs">Evidencia: ${refs}</p>
+  </section>
+  <nav class="pager" aria-label="Otros protocolos">${prev ? `<a class="btn" href="#${prev.id}">${ic("back")}${esc(prev.title)}</a>` : `<span></span>`}${next ? `<a class="btn" href="#${next.id}">${esc(next.title)}${ic("next")}</a>` : `<a class="btn" href="#bib">Bibliografía${ic("next")}</a>`}</nav>
+  </div>`);
+});
+
+document.getElementById("biblist").innerHTML = B.map(([h, list]) =>
+  `<h4>${esc(h)}</h4><ol start="${list[0][0]}">${list.map(([k, t, u, l]) => `<li id="ref-${k}">${esc(t)} <a href="${u}" target="_blank" rel="noopener">${esc(l)}</a></li>`).join("")}</ol>`).join("") +
+  `<p class="note">Desde el entorno de trabajo no se pudo acceder directamente a PubMed. Cada referencia se comprobó en su ficha de PubMed, Cochrane o la revista. Los autores de las referencias 9, 15 y 20 no se pudieron confirmar; el enlace lleva al artículo.</p>`;
+tiles.insertAdjacentHTML("beforeend", `<a class="tile bibt" href="#bib"><span class="ti">${ic("book")}</span><span><span class="tn">Evidencia</span><span class="tt">Bibliografía</span><span class="ts">23 referencias con enlace</span></span></a>`);
+const baseTitle = document.title;
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  let target = h ? document.getElementById(h) : null, anchor = null;
+  if (h.startsWith("ref-")) { anchor = target; target = document.getElementById("bib"); }
+  if (!target || !target.classList.contains("view")) { anchor = target && target.closest("#inicio") ? target : null; target = document.getElementById("inicio"); }
+  document.querySelectorAll(".view").forEach(v => { v.hidden = v !== target; });
+  const t = target.querySelector("h2.ptitle");
+  document.title = target.id === "inicio" || !t ? baseTitle : `${t.textContent} · Trahumane`;
+  if (anchor) anchor.scrollIntoView(); else window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+</body></html>
